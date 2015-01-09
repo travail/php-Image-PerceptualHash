@@ -1,0 +1,17 @@
+{
+  "name": "travail/image-perceptualhash",
+  "description": "travail/image-perceptualhash",
+  "license": "PHP-3.0",
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Image\\": "lib"
+    }
+  },
+  "require": {
+    "ext-gd": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*"
+  }
+}
