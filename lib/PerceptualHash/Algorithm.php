@@ -5,10 +5,18 @@ namespace Image\PerceptualHash;
 interface Algorithm
 {
     /**
-     * Calculate the hash
+     * Calculate the binary hash
      *
      * @param resource $resource
-     * @return string
+     * @return string Binary string
      */
-    public function calculate($resource);
+    public function bin($resource);
+
+    /**
+     * Calculate the hex hash
+     *
+     * @param resource $resource
+     * @return string Hex string
+     */
+    public function hex($binary);
 }
