@@ -11,28 +11,60 @@ class PerceptualHash {
        @var Algorithm The hasing algorithm
      */
     protected $algorithm;
-    protected $data;
 
+    /**
+     * @var string Calculated binary hash
+     */
+    protected $bin;
+
+    /**
+     * @var string Calculated hex hash
+     */
+    protected $hex;
+
+    /**
+     * @param mixed $file
+     * @param Algorithm $algorithm
+     */
     public function __construct($file, Algorithm $algorithm = null)
     {
+        $resource = is_resource($file) ? $file : $this->load($file);
         $this->algorithm = $algorithm ?: new AverageHash;
-        $this->data = is_resource($file) ? $file : $this->load($file);
+        $this->bin = $this->algorithm->bin($resource);
+        $this->hex = $this->algorithm->hex($this->bin);
     }
 
-    public function hash()
+    public function bin()
     {
-        return $this->algorithm->calculate($this->data);
+        return $this->bin;
     }
 
+    public function hex()
+    {
+        return $this->hex;
+    }
+
+    /**
+     * @param mixed $file
+     * @return integer The distance to $file
+     */
     public function compare($file)
     {
         $algorithm_class = get_class($this->algorithm);
         $objective = new self($file, new $algorithm_class);
 
-        return self::hammingDistance($this->hash(), $objective->hash());
+        return self::distance($this->bin, $objective->bin);
     }
 
-    public static function hammingDistance($hash1, $hash2)
+    /**
+     * Calculate the Hamming distance between two hashes
+     *
+     * @param string $hash1
+     * @param string $hash2
+     * @return integer $diff
+     * @throws
+     */
+    public static function distance($hash1, $hash2)
     {
         if (!is_string($hash1) || !is_string($hash2)) {
             throw new Exception();
@@ -51,7 +83,7 @@ class PerceptualHash {
             }
         }
 
-        return $diff;
+        return (int)$diff;
     }
 
     protected function load($file)

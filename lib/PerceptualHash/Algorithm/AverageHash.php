@@ -2,6 +2,7 @@
 
 namespace Image\PerceptualHash\Algorithm;
 
+use Exception;
 use Image\PerceptualHash\Algorithm;
 
 class AverageHash implements Algorithm
@@ -11,7 +12,7 @@ class AverageHash implements Algorithm
     /**
      * {@inheritDoc}
      */
-    public function calculate($resource)
+    public function bin($resource)
     {
         // Resize
         $resized = imagecreatetruecolor(static::SIZE, static::SIZE);
@@ -38,6 +39,15 @@ class AverageHash implements Algorithm
         foreach ($pixels as $pixel) {
             $binary .= $pixel > $average ? 1 : 0;
             $one = $one << 1;
+        }
+
+        return $binary;
+    }
+
+    public function hex($binary)
+    {
+        if (strlen($binary) !== self::SIZE * self::SIZE) {
+            throw new Exception('Binary length must be ' . self::SIZE * self::SIZE);
         }
 
         $hex = '';
