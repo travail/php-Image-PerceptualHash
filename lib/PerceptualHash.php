@@ -8,7 +8,7 @@ use Image\PerceptualHash\Algorithm\AverageHash;
 
 class PerceptualHash {
     /**
-       @var Algorithm The hasing algorithm
+       @var Algorithm Instance of Algorithm
      */
     protected $algorithm;
 
@@ -18,13 +18,15 @@ class PerceptualHash {
     protected $bin;
 
     /**
-     * @var string Calculated hex hash
+     * @var string Calculated hexadecimal hash
      */
     protected $hex;
 
     /**
-     * @param mixed $file
-     * @param Algorithm $algorithm
+     * Creates an instance and calculate hashes.
+     *
+     * @param string|resource $file Path to file or file handle
+     * @param Algorithm $algorithm Instance of Algorithm class
      */
     public function __construct($file, Algorithm $algorithm = null)
     {
@@ -34,18 +36,30 @@ class PerceptualHash {
         $this->hex = $this->algorithm->hex($this->bin);
     }
 
+    /**
+     * Returns binary hash.
+     *
+     * @return string Binary hash
+     */
     public function bin()
     {
         return $this->bin;
     }
 
+    /**
+     * Returns hexadecimal hash.
+     *
+     * @return string Hexadecimal hash
+     */
     public function hex()
     {
         return $this->hex;
     }
 
     /**
-     * @param mixed $file
+     * Compares with another image and returns a distance to that.
+     *
+     * @param string|resource $file Path to file or file handle
      * @return integer The distance to $file
      */
     public function compare($file)
@@ -57,11 +71,11 @@ class PerceptualHash {
     }
 
     /**
-     * Calculate the Hamming distance between two hashes
+     * Calculates Hamming distance between two hashes
      *
      * @param string $hash1
      * @param string $hash2
-     * @return integer $diff
+     * @return integer Hamming distance between two hashes
      * @throws
      */
     public static function distance($hash1, $hash2)
@@ -86,11 +100,22 @@ class PerceptualHash {
         return (int)$diff;
     }
 
+    /**
+     * Returns a similarity to the $file.
+     *
+     * @param string|resource $file Path to file or file handle
+     * @return double Similarity represented between 0 and 1
+     */
     public function similarity($file)
     {
         return 1 - ($this->compare($file) / strlen($this->bin));
     }
 
+    /**
+     * @param string $file Path to file
+     * @return resource
+     * @throws Exception
+     */
     protected function load($file)
     {
         if (!file_exists($file)) {
