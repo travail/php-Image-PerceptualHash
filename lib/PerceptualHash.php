@@ -86,6 +86,11 @@ class PerceptualHash {
         return (int)$diff;
     }
 
+    public function similarity($file)
+    {
+        return 1 - ($this->compare($file) / strlen($this->bin));
+    }
+
     protected function load($file)
     {
         if (!file_exists($file)) {
