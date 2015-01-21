@@ -2,7 +2,7 @@
 
 namespace Image\PerceptualHash\Algorithm;
 
-use Exception;
+use LengthException;
 use Image\PerceptualHash\Algorithm;
 
 class AverageHash implements Algorithm
@@ -34,25 +34,28 @@ class AverageHash implements Algorithm
         // Calculate the average pixel value
         $average = floor(array_sum($pixels) / count($pixels));
 
-        $binary = '';
+        $bin = '';
         $one = 1;
         foreach ($pixels as $pixel) {
-            $binary .= $pixel > $average ? 1 : 0;
+            $bin .= $pixel > $average ? 1 : 0;
             $one = $one << 1;
         }
 
-        return $binary;
+        return $bin;
     }
 
-    public function hex($binary)
+    /**
+     * {@inheritDoc}
+     */
+    public function hex($bin)
     {
-        if (strlen($binary) !== self::SIZE * self::SIZE) {
-            throw new Exception('Binary length must be ' . self::SIZE * self::SIZE);
+        if (strlen($bin) !== self::SIZE * self::SIZE) {
+            throw new LengthException('Binary length must be ' . self::SIZE * self::SIZE);
         }
 
         $hex = '';
-        foreach (str_split($binary, 4) as $binary) {
-            $hex .= dechex(bindec($binary));
+        foreach (str_split($bin, 4) as $bin) {
+            $hex .= dechex(bindec($bin));
         }
 
         return $hex;

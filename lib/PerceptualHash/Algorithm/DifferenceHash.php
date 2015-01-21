@@ -2,7 +2,7 @@
 
 namespace Image\PerceptualHash\Algorithm;
 
-use Exception;
+use LengthException;
 use Image\PerceptualHash\Algorithm;
 
 class DifferenceHash implements Algorithm
@@ -45,10 +45,13 @@ class DifferenceHash implements Algorithm
         return $bin;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function hex($bin)
     {
         if (strlen($bin) !== self::SIZE * self::SIZE) {
-            throw new Exception('Binary length must be ' . self::SIZE * self::SIZE);
+            throw new LengthException('Binary length must be ' . self::SIZE * self::SIZE);
         }
 
         $hex = '';
