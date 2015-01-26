@@ -3,8 +3,11 @@
 namespace Image;
 
 use Exception;
+use InvalidArgumentException;
+use LengthException;
 use Image\PerceptualHash\Algorithm;
 use Image\PerceptualHash\Algorithm\AverageHash;
+use Image\PerceptualHash\Exception\FileNotFoundException;
 
 class PerceptualHash {
     /**
@@ -76,16 +79,17 @@ class PerceptualHash {
      * @param string $hash1
      * @param string $hash2
      * @return integer Hamming distance between two hashes
-     * @throws
+     * @throws InvalidArgumentException
+     * @throws LengthException
      */
     public static function distance($hash1, $hash2)
     {
         if (!is_string($hash1) || !is_string($hash2)) {
-            throw new Exception();
+            throw new InvalidArgumentException('Given hashes are not string');
         }
 
         if (strlen($hash1) !== strlen($hash2)) {
-            throw new Exception();
+            throw new LengthException('Length of given hashes is not accordant');
         }
 
         $diff = 0;
@@ -114,12 +118,13 @@ class PerceptualHash {
     /**
      * @param string $file Path to file
      * @return resource
+     * @throws Image\PerceptualHash\Exception\FileNotFoundException
      * @throws Exception
      */
     protected function load($file)
     {
         if (!file_exists($file)) {
-            throw new Exception("No such a file $file");
+            throw new FileNotFoundException("No such a file $file");
         }
 
         try {
