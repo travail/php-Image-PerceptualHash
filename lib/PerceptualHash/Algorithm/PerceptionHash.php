@@ -40,7 +40,7 @@ class PerceptionHash implements Algorithm
             $matrix[$x] = $this->dct($col);
         }
 
-        // Extract the top 8x8 pixels.
+        // Extract the top-left 8x8 pixels.
         $pixels = array();
         for ($y = 0; $y < 8; $y++) {
             for ($x = 0; $x < 8; $x++) {
@@ -48,6 +48,7 @@ class PerceptionHash implements Algorithm
             }
         }
 
+        // TODO: median or mean?
         // Calculate the median.
         $median = $this->median($pixels);
         // Calculate the binary hash.
