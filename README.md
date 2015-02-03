@@ -100,7 +100,7 @@ Path to a file or a resource of that.
 
 ### `public similarity(mixed $file)`
 
-Calcuates the simiralrity to another image.
+Calcuates the similarity to another image.
 
 #### $file
 
