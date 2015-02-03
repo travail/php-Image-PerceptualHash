@@ -11,7 +11,7 @@ use Image\PerceptualHash\Exception\FileNotFoundException;
 
 class PerceptualHash {
     /**
-       @var Algorithm Instance of Algorithm
+     * @var Algorithm Instance of Algorithm
      */
     protected $algorithm;
 
