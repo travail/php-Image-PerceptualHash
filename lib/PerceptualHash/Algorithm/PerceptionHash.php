@@ -59,7 +59,7 @@ class PerceptionHash implements Algorithm
             $one = $one << 1;
         }
 
-        return $bin;
+        return (string) $bin;
     }
 
     public function hex($bin)
@@ -73,7 +73,7 @@ class PerceptionHash implements Algorithm
             $hex .= dechex(bindec($bin));
         }
 
-        return $hex;
+        return (string) $hex;
     }
 
     protected function dct(array $pixels)

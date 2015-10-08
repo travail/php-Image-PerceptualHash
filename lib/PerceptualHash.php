@@ -46,7 +46,7 @@ class PerceptualHash {
      */
     public function bin()
     {
-        return $this->bin;
+        return (string) $this->bin;
     }
 
     /**
@@ -56,7 +56,7 @@ class PerceptualHash {
      */
     public function hex()
     {
-        return $this->hex;
+        return (string) $this->hex;
     }
 
     /**
@@ -101,7 +101,7 @@ class PerceptualHash {
             }
         }
 
-        return (int)$diff;
+        return (int) $diff;
     }
 
     /**
@@ -112,7 +112,7 @@ class PerceptualHash {
      */
     public function similarity($file)
     {
-        return 1 - ($this->compare($file) / strlen($this->bin));
+        return (double) 1 - ($this->compare($file) / strlen($this->bin));
     }
 
     /**

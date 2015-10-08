@@ -42,7 +42,7 @@ class DifferenceHash implements Algorithm
 
         imagedestroy($resized);
 
-        return $bin;
+        return (string) $bin;
     }
 
     /**
@@ -59,6 +59,6 @@ class DifferenceHash implements Algorithm
             $hex .= dechex(bindec($bin));
         }
 
-        return $hex;
+        return (string) $hex;
     }
 }

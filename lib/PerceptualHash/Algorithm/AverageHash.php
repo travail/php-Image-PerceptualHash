@@ -41,7 +41,7 @@ class AverageHash implements Algorithm
             $one = $one << 1;
         }
 
-        return $bin;
+        return (string) $bin;
     }
 
     /**
@@ -58,6 +58,6 @@ class AverageHash implements Algorithm
             $hex .= dechex(bindec($bin));
         }
 
-        return $hex;
+        return (string) $hex;
     }
 }
