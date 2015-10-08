@@ -9,6 +9,7 @@ Image\PerceptualHash - Generate comparable hash from images
 
 ```php
 <?php
+
 use Image\PerceptualHash;
 use Image\PerceptualHash\Algorithm\DifferenceHash;
 use Image\PerceptualHash\Algorithm\PerceptionHash;
@@ -66,7 +67,11 @@ or
 
 ## METHODS
 
-### `public __construct($file, Algorithm $algorithm)`
+### __construct
+
+```php
+Image\PerceptualHash __construct($file, Algorithm $algorithm)
+```
 
 Creates a new instance of Image\PerceptualHash and calculates hashes.
 
@@ -82,15 +87,27 @@ Hashing algorithm, currently the following algorithm are available:
 * DifferenceHash
 * PerceptionHash
 
-### `public bin()`
+### bin
+
+```php
+string bin()
+```
 
 Returns calculated binary hash.
 
-### `public hex()`
+### hex
+
+```
+string hex()
+```
 
 Returns calculated hexadecimal hash.
 
-### `public compare(mixed $file)`
+### compare
+
+```php
+int compare(mixed $file)
+```
 
 Compares with another image and returns the Hamming distance to that.
 
@@ -98,7 +115,11 @@ Compares with another image and returns the Hamming distance to that.
 
 Path to a file or a resource of that.
 
-### `public similarity(mixed $file)`
+### similarity
+
+```php
+double similarity(mixed $file)
+```
 
 Calcuates the similarity to another image.
 
