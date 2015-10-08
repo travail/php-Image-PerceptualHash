@@ -3,7 +3,7 @@
 use Image\PerceptualHash;
 use Image\PerceptualHash\Algorithm\PerceptionHash;
 
-class PerceptualHashTest extends PHPUnit_Framework_TestCase
+class PerceptionHashTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

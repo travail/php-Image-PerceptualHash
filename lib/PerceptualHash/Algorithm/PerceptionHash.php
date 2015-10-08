@@ -22,7 +22,6 @@ class PerceptionHash implements Algorithm
         $row = array();
         $rows = array();
         $col = array();
-        $cols = array();
         for ($y = 0; $y < static::SIZE; $y++) {
             for ($x = 0; $x < static::SIZE; $x++) {
                 $rgb = imagecolorsforindex($resized, imagecolorat($resized, $x, $y));
@@ -89,7 +88,7 @@ class PerceptionHash implements Algorithm
                 $sum += $pixels[$j] * cos($i * pi() * ($j + 0.5) / ($size));
             }
             $sum *= sqrt(2 / $size);
-            if ($i == 0) {
+            if ($i === 0) {
                 $sum *= 1 / sqrt(2);
             }
             $transformed[$i] = $sum;
