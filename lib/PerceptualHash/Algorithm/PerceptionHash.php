@@ -48,7 +48,7 @@ class PerceptionHash implements Algorithm
             }
         }
 
-        // TODO: median or mean?
+        // @todo median or mean?
         // Calculate the median.
         $median = $this->median($pixels);
         // Calculate the binary hash.
@@ -62,6 +62,9 @@ class PerceptionHash implements Algorithm
         return (string) $bin;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function hex($bin)
     {
         if (strlen($bin) !== 64) {

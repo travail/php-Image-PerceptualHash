@@ -63,7 +63,7 @@ class PerceptualHash {
      * Compares with another image and returns a distance to that.
      *
      * @param string|resource $file Path to file or file handle
-     * @return integer The distance to $file
+     * @return int The distance to $file
      */
     public function compare($file)
     {
@@ -78,7 +78,7 @@ class PerceptualHash {
      *
      * @param string $hash1
      * @param string $hash2
-     * @return integer Hamming distance between two hashes
+     * @return int Hamming distance between two hashes
      * @throws InvalidArgumentException
      * @throws LengthException
      */
