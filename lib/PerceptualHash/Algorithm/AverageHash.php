@@ -2,6 +2,7 @@
 
 namespace Image\PerceptualHash\Algorithm;
 
+use LengthException;
 use Image\PerceptualHash\Algorithm;
 
 class AverageHash implements Algorithm
@@ -11,7 +12,7 @@ class AverageHash implements Algorithm
     /**
      * {@inheritDoc}
      */
-    public function calculate($resource)
+    public function bin($resource)
     {
         // Resize
         $resized = imagecreatetruecolor(static::SIZE, static::SIZE);
@@ -19,30 +20,42 @@ class AverageHash implements Algorithm
             $resized, $resource, 0, 0, 0, 0,
             static::SIZE, static::SIZE, imagesx($resource), imagesy($resource));
 
-        // Create an array of gray-scale pixel value
+        // Create an array of gray-scaled pixel values.
         $pixels = array();
         for ($y = 0; $y < static::SIZE; $y++) {
             for ($x = 0; $x < static::SIZE; $x++) {
                 $rgb = imagecolorsforindex($resized, imagecolorat($resized, $x, $y));
-                $pixels[] = floor(($rgb['red'] + $rgb['green'] + $rgb['blue']) / 3);
+                $pixels[] = ($rgb['red'] + $rgb['green'] + $rgb['blue']) / 3;
             }
         }
 
         imagedestroy($resized);
 
-        // Calculate the average pixel value
-        $average = floor(array_sum($pixels) / count($pixels));
+        // Calculate a mean of gray-scaled pixel value.
+        $mean = array_sum($pixels) / count($pixels);
 
-        $binary = '';
+        $bin = '';
         $one = 1;
         foreach ($pixels as $pixel) {
-            $binary .= $pixel > $average ? 1 : 0;
+            $bin .= $pixel > $mean ? 1 : 0;
             $one = $one << 1;
         }
 
+        return $bin;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hex($bin)
+    {
+        if (strlen($bin) !== self::SIZE * self::SIZE) {
+            throw new LengthException('Binary length must be ' . self::SIZE * self::SIZE);
+        }
+
         $hex = '';
-        foreach (str_split($binary, 4) as $binary) {
-            $hex .= dechex(bindec($binary));
+        foreach (str_split($bin, 4) as $bin) {
+            $hex .= dechex(bindec($bin));
         }
 
         return $hex;
