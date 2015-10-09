@@ -1,23 +1,23 @@
 <?php
 
 use Image\PerceptualHash;
-use Image\PerceptualHash\Algorithm\PerceptionHash;
+use Image\PerceptualHash\Algorithm\DifferenceHash;
 
-class PerceptionHashTest extends PHPUnit_Framework_TestCase
+class DifferenceHashTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->path_inuo1 = __DIR__ . '/images/inuo1.jpg';
-        $this->path_inuo2 = __DIR__ . '/images/inuo2.jpg';
-        $this->hex_inuo1 = 'eacc911396406eb7';
-        $this->hex_inuo2 = 'b9f8910e89f44e43';
-        $this->bin_inuo1 = '1110101011001100100100010001001110010110010000000110111010110111';
-        $this->bin_inuo2 = '1011100111111000100100010000111010001001111101000100111001000011';
+        $this->path_inuo1 = __DIR__ . '/../images/inuo1.jpg';
+        $this->path_inuo2 = __DIR__ . '/../images/inuo2.jpg';
+        $this->hex_inuo1 = '4c58d4dcc9ed6c49';
+        $this->hex_inuo2 = '5978ac96d0555949';
+        $this->bin_inuo1 = '0100110001011000110101001101110011001001111011010110110001001001';
+        $this->bin_inuo2 = '0101100101111000101011001001011011010000010101010101100101001001';
     }
 
     public function testCalculateBinaryHash()
     {
-        $algorithm = new PerceptionHash;
+        $algorithm = new DifferenceHash;
         $ph = new PerceptualHash($this->path_inuo1, $algorithm);
         $bin = $ph->bin();
 
@@ -27,7 +27,7 @@ class PerceptionHashTest extends PHPUnit_Framework_TestCase
 
     public function testCalculateHexHash()
     {
-        $algorithm = new PerceptionHash;
+        $algorithm = new DifferenceHash;
         $ph = new PerceptualHash($this->path_inuo1, $algorithm);
         $hex = $ph->hex();
 
@@ -37,16 +37,16 @@ class PerceptionHashTest extends PHPUnit_Framework_TestCase
 
     public function testCompareDifferentImages()
     {
-        $algorithm = new PerceptionHash;
+        $algorithm = new DifferenceHash;
         $ph = new PerceptualHash($this->path_inuo1, $algorithm);
         $diff = $ph->compare($this->path_inuo2);
 
-        $this->assertEquals(26, $diff);
+        $this->assertEquals(22, $diff);
     }
 
     public function testCompareSameImages()
     {
-        $algorithm = new PerceptionHash;
+        $algorithm = new DifferenceHash;
         $ph = new PerceptualHash($this->path_inuo1, $algorithm);
         $diff = $ph->compare($this->path_inuo1);
 
