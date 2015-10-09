@@ -16,6 +16,14 @@ class BasicTest extends PHPUnit_Framework_TestCase
         $this->bin_inuo2 = '1111011111110011000000100000000011000011110000111100001111111111';
     }
 
+    public function testVersion()
+    {
+        $version = PerceptualHash::version();
+        $this->assertTrue(isset($version));
+        $this->assertTrue(is_string($version));
+        $this->assertSame(PerceptualHash::VERSION, $version);
+    }
+
     public function testLoad()
     {
         try {

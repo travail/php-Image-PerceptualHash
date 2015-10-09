@@ -10,6 +10,8 @@ use Image\PerceptualHash\Algorithm\AverageHash;
 use Image\PerceptualHash\Exception\FileNotFoundException;
 
 class PerceptualHash {
+    const VERSION = '0.1.0';
+
     /**
      * @var Algorithm Instance of Algorithm
      */
@@ -37,6 +39,14 @@ class PerceptualHash {
         $this->algorithm = $algorithm ?: new AverageHash;
         $this->bin = $this->algorithm->bin($resource);
         $this->hex = $this->algorithm->hex($this->bin);
+    }
+
+    /**
+     * @return string The version of Image\PerceptualHash.
+     */
+    public static function version()
+    {
+        return (string) self::VERSION;
     }
 
     /**
