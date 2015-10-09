@@ -15,15 +15,15 @@ class AverageHash implements Algorithm
     public function bin($resource)
     {
         // Resize
-        $resized = imagecreatetruecolor(static::SIZE, static::SIZE);
+        $resized = imagecreatetruecolor(self::SIZE, self::SIZE);
         imagecopyresampled(
             $resized, $resource, 0, 0, 0, 0,
-            static::SIZE, static::SIZE, imagesx($resource), imagesy($resource));
+            self::SIZE, self::SIZE, imagesx($resource), imagesy($resource));
 
         // Create an array of gray-scaled pixel values.
         $pixels = array();
-        for ($y = 0; $y < static::SIZE; $y++) {
-            for ($x = 0; $x < static::SIZE; $x++) {
+        for ($y = 0; $y < self::SIZE; $y++) {
+            for ($x = 0; $x < self::SIZE; $x++) {
                 $rgb = imagecolorsforindex($resized, imagecolorat($resized, $x, $y));
                 $pixels[] = ($rgb['red'] + $rgb['green'] + $rgb['blue']) / 3;
             }
@@ -41,7 +41,7 @@ class AverageHash implements Algorithm
             $one = $one << 1;
         }
 
-        return $bin;
+        return (string) $bin;
     }
 
     /**
@@ -58,6 +58,6 @@ class AverageHash implements Algorithm
             $hex .= dechex(bindec($bin));
         }
 
-        return $hex;
+        return (string) $hex;
     }
 }

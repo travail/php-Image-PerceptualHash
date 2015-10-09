@@ -13,10 +13,10 @@ interface Algorithm
     public function bin($resource);
 
     /**
-     * Calculate hexadecimal hash.
+     * Calculate hexadecimal hash by binary_hash.
      *
-     * @param resource $resource
+     * @param string $bin Binary hash
      * @return string Hexadecimal hash
      */
-    public function hex($binary);
+    public function hex($bin);
 }

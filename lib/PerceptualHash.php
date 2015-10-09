@@ -10,6 +10,8 @@ use Image\PerceptualHash\Algorithm\AverageHash;
 use Image\PerceptualHash\Exception\FileNotFoundException;
 
 class PerceptualHash {
+    const VERSION = '0.1.0';
+
     /**
      * @var Algorithm Instance of Algorithm
      */
@@ -40,13 +42,21 @@ class PerceptualHash {
     }
 
     /**
+     * @return string The version of Image\PerceptualHash.
+     */
+    public static function version()
+    {
+        return (string) self::VERSION;
+    }
+
+    /**
      * Returns binary hash.
      *
      * @return string Binary hash
      */
     public function bin()
     {
-        return $this->bin;
+        return (string) $this->bin;
     }
 
     /**
@@ -56,14 +66,14 @@ class PerceptualHash {
      */
     public function hex()
     {
-        return $this->hex;
+        return (string) $this->hex;
     }
 
     /**
      * Compares with another image and returns a distance to that.
      *
      * @param string|resource $file Path to file or file handle
-     * @return integer The distance to $file
+     * @return int The distance to $file
      */
     public function compare($file)
     {
@@ -78,7 +88,7 @@ class PerceptualHash {
      *
      * @param string $hash1
      * @param string $hash2
-     * @return integer Hamming distance between two hashes
+     * @return int Hamming distance between two hashes
      * @throws InvalidArgumentException
      * @throws LengthException
      */
@@ -101,7 +111,7 @@ class PerceptualHash {
             }
         }
 
-        return (int)$diff;
+        return (int) $diff;
     }
 
     /**
@@ -112,7 +122,7 @@ class PerceptualHash {
      */
     public function similarity($file)
     {
-        return 1 - ($this->compare($file) / strlen($this->bin));
+        return (double) 1 - ($this->compare($file) / strlen($this->bin));
     }
 
     /**

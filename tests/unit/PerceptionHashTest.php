@@ -3,12 +3,12 @@
 use Image\PerceptualHash;
 use Image\PerceptualHash\Algorithm\PerceptionHash;
 
-class PerceptualHashTest extends PHPUnit_Framework_TestCase
+class PerceptionHashTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->path_inuo1 = __DIR__ . '/images/inuo1.jpg';
-        $this->path_inuo2 = __DIR__ . '/images/inuo2.jpg';
+        $this->path_inuo1 = __DIR__ . '/../images/inuo1.jpg';
+        $this->path_inuo2 = __DIR__ . '/../images/inuo2.jpg';
         $this->hex_inuo1 = 'eacc911396406eb7';
         $this->hex_inuo2 = 'b9f8910e89f44e43';
         $this->bin_inuo1 = '1110101011001100100100010001001110010110010000000110111010110111';

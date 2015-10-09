@@ -14,8 +14,8 @@ class DifferenceHash implements Algorithm
      */
     public function bin($resource)
     {
-        $width = static::SIZE + 1;
-        $heigth = static::SIZE;
+        $width = self::SIZE + 1;
+        $heigth = self::SIZE;
 
         // Resize the image.
         $resized = imagecreatetruecolor($width, $heigth);
@@ -42,7 +42,7 @@ class DifferenceHash implements Algorithm
 
         imagedestroy($resized);
 
-        return $bin;
+        return (string) $bin;
     }
 
     /**
@@ -59,6 +59,6 @@ class DifferenceHash implements Algorithm
             $hex .= dechex(bindec($bin));
         }
 
-        return $hex;
+        return (string) $hex;
     }
 }

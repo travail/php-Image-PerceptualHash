@@ -7,8 +7,8 @@ class DifferenceHashTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->path_inuo1 = __DIR__ . '/images/inuo1.jpg';
-        $this->path_inuo2 = __DIR__ . '/images/inuo2.jpg';
+        $this->path_inuo1 = __DIR__ . '/../images/inuo1.jpg';
+        $this->path_inuo2 = __DIR__ . '/../images/inuo2.jpg';
         $this->hex_inuo1 = '4c58d4dcc9ed6c49';
         $this->hex_inuo2 = '5978ac96d0555949';
         $this->bin_inuo1 = '0100110001011000110101001101110011001001111011010110110001001001';

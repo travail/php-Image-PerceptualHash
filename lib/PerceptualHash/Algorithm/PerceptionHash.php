@@ -14,17 +14,16 @@ class PerceptionHash implements Algorithm
      */
     public function bin($resource)
     {
-        $resized = imagecreatetruecolor(static::SIZE, static::SIZE);
+        $resized = imagecreatetruecolor(self::SIZE, self::SIZE);
         imagecopyresampled($resized, $resource, 0, 0, 0, 0,
-            static::SIZE, static::SIZE, imagesx($resource), imagesy($resource));
+            self::SIZE, self::SIZE, imagesx($resource), imagesy($resource));
         // Get luma value (YCbCr) from RGB colors and calculate the DCT for each row.
         $matrix = array();
         $row = array();
         $rows = array();
         $col = array();
-        $cols = array();
-        for ($y = 0; $y < static::SIZE; $y++) {
-            for ($x = 0; $x < static::SIZE; $x++) {
+        for ($y = 0; $y < self::SIZE; $y++) {
+            for ($x = 0; $x < self::SIZE; $x++) {
                 $rgb = imagecolorsforindex($resized, imagecolorat($resized, $x, $y));
                 $row[$x] = floor(($rgb['red'] * 0.299) + ($rgb['green'] * 0.587) + ($rgb['blue'] * 0.114));
             }
@@ -33,8 +32,8 @@ class PerceptionHash implements Algorithm
 
         imagedestroy($resized);
 
-        for ($x = 0; $x < static::SIZE; $x++) {
-            for ($y = 0; $y < static::SIZE; $y++) {
+        for ($x = 0; $x < self::SIZE; $x++) {
+            for ($y = 0; $y < self::SIZE; $y++) {
                 $col[$y] = $rows[$y][$x];
             }
             $matrix[$x] = $this->dct($col);
@@ -48,7 +47,7 @@ class PerceptionHash implements Algorithm
             }
         }
 
-        // TODO: median or mean?
+        // @todo median or mean?
         // Calculate the median.
         $median = $this->median($pixels);
         // Calculate the binary hash.
@@ -59,9 +58,12 @@ class PerceptionHash implements Algorithm
             $one = $one << 1;
         }
 
-        return $bin;
+        return (string) $bin;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function hex($bin)
     {
         if (strlen($bin) !== 64) {
@@ -73,7 +75,7 @@ class PerceptionHash implements Algorithm
             $hex .= dechex(bindec($bin));
         }
 
-        return $hex;
+        return (string) $hex;
     }
 
     protected function dct(array $pixels)
@@ -86,7 +88,7 @@ class PerceptionHash implements Algorithm
                 $sum += $pixels[$j] * cos($i * pi() * ($j + 0.5) / ($size));
             }
             $sum *= sqrt(2 / $size);
-            if ($i == 0) {
+            if ($i === 0) {
                 $sum *= 1 / sqrt(2);
             }
             $transformed[$i] = $sum;
