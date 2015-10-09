@@ -106,7 +106,7 @@ Returns calculated hexadecimal hash.
 ### compare
 
 ```php
-int compare(mixed $file)
+int compare(string|resource $file)
 ```
 
 Compares with another image and returns the Hamming distance to that.
@@ -115,10 +115,16 @@ Compares with another image and returns the Hamming distance to that.
 
 Path to a file or a resource of that.
 
+### distance
+
+```php
+int distance(string $hash1, string $hash2)
+```
+
 ### similarity
 
 ```php
-double similarity(mixed $file)
+double similarity(string|resource $file)
 ```
 
 Calcuates the similarity to another image.
