@@ -14,16 +14,16 @@ class PerceptionHash implements Algorithm
      */
     public function bin($resource)
     {
-        $resized = imagecreatetruecolor(static::SIZE, static::SIZE);
+        $resized = imagecreatetruecolor(self::SIZE, self::SIZE);
         imagecopyresampled($resized, $resource, 0, 0, 0, 0,
-            static::SIZE, static::SIZE, imagesx($resource), imagesy($resource));
+            self::SIZE, self::SIZE, imagesx($resource), imagesy($resource));
         // Get luma value (YCbCr) from RGB colors and calculate the DCT for each row.
         $matrix = array();
         $row = array();
         $rows = array();
         $col = array();
-        for ($y = 0; $y < static::SIZE; $y++) {
-            for ($x = 0; $x < static::SIZE; $x++) {
+        for ($y = 0; $y < self::SIZE; $y++) {
+            for ($x = 0; $x < self::SIZE; $x++) {
                 $rgb = imagecolorsforindex($resized, imagecolorat($resized, $x, $y));
                 $row[$x] = floor(($rgb['red'] * 0.299) + ($rgb['green'] * 0.587) + ($rgb['blue'] * 0.114));
             }
@@ -32,8 +32,8 @@ class PerceptionHash implements Algorithm
 
         imagedestroy($resized);
 
-        for ($x = 0; $x < static::SIZE; $x++) {
-            for ($y = 0; $y < static::SIZE; $y++) {
+        for ($x = 0; $x < self::SIZE; $x++) {
+            for ($y = 0; $y < self::SIZE; $y++) {
                 $col[$y] = $rows[$y][$x];
             }
             $matrix[$x] = $this->dct($col);
