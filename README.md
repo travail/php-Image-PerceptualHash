@@ -40,30 +40,41 @@ $ph = new PerceptualHash('/path/to/foo.jpg', new PerceptionHash());
 
 Image\PerceptualHash generates distinct, but not unique fingerprint with three hashing algorithms. Unlike cryptographic hashing, these fingerprints from similar images will be also similar.
 
+## DEPENDENCIES
+
+* ext-gd
+
 ## INSTALLATION
 
 To install this package into your project via composer, add the following snippet to your `composer.json`. Then run `composer install`.
 
-```
+```json
 "require": {
-    "travail/image-perceptualhash": "dev-master"
+  "travail/image-perceptualhash": "dev-master"
 }
 ```
 
 or
 
-```
+```json
 "repositories": {
-    {
-        "type": "vcs",
-        "url": "git@github.com:travail/php-Image-PerceptualHash.git"
-    }
+  {
+    "type": "vcs",
+    "url": "git@github.com:travail/php-Image-PerceptualHash.git"
+  }
 }
 ```
 
-## DEPENDENCIES
+## TESTS
 
-* ext-gd
+After cloning the project, run `composer install` and `./vendor/bin/phpunit`.
+
+```
+$ git clone git@github.com:travail/php-Image-PerceptualHash.git
+$ cd php-Image-PerceptualHash
+$ composer install
+$ ./vendor/bin/phpunit
+```
 
 ## METHODS
 
