@@ -36,7 +36,7 @@ class PerceptualHash {
     public function __construct($file, Algorithm $algorithm = null)
     {
         $resource = is_resource($file) ? $file : $this->load($file);
-        $this->algorithm = $algorithm ?: new AverageHash;
+        $this->algorithm = $algorithm instanceof Algorithm ? $algorithm : new AverageHash;
         $this->bin = $this->algorithm->bin($resource);
         $this->hex = $this->algorithm->hex($this->bin);
     }
@@ -128,7 +128,7 @@ class PerceptualHash {
     /**
      * @param string $file Path to file
      * @return resource
-     * @throws Image\PerceptualHash\Exception\FileNotFoundException
+     * @throws \Image\PerceptualHash\Exception\FileNotFoundException
      * @throws Exception
      */
     protected function load($file)

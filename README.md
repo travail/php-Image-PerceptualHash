@@ -138,7 +138,7 @@ int distance(string $hash1, string $hash2)
 double similarity(string|resource $file)
 ```
 
-Calcuates the similarity to another image.
+Calculates the similarity to another image.
 
 #### $file
 

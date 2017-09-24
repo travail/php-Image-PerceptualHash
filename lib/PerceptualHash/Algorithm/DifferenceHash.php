@@ -15,16 +15,16 @@ class DifferenceHash implements Algorithm
     public function bin($resource)
     {
         $width = self::SIZE + 1;
-        $heigth = self::SIZE;
+        $height = self::SIZE;
 
         // Resize the image.
-        $resized = imagecreatetruecolor($width, $heigth);
+        $resized = imagecreatetruecolor($width, $height);
         imagecopyresampled($resized, $resource, 0, 0, 0, 0,
-            $width, $heigth, imagesx($resource), imagesy($resource));
+            $width, $height, imagesx($resource), imagesy($resource));
 
         $bin = '';
         $one = 1;
-        for ($y = 0; $y < $heigth; $y++) {
+        for ($y = 0; $y < $height; $y++) {
             // Get the pixel value for the leftmost pixel.
             $rgb = imagecolorsforindex($resized, imagecolorat($resized, 0, $y));
             $left = floor(($rgb['red'] + $rgb['green'] + $rgb['blue']) / 3);
