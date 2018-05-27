@@ -1,8 +1,11 @@
 <?php
 
-use Image\PerceptualHash;
+namespace Image\Tests;
 
-class AverageHashTest extends PHPUnit_Framework_TestCase
+use Image\PerceptualHash;
+use PHPUnit\Framework\TestCase;
+
+class AverageHashTest extends TestCase
 {
     private $path_image1;
     private $path_image2;
@@ -27,7 +30,7 @@ class AverageHashTest extends PHPUnit_Framework_TestCase
         $bin = $ph->bin();
 
         $this->assertEquals(64, strlen($bin));
-        $this->assertEquals($this->bin_image2, $bin);
+        $this->assertEquals($this->bin_image1, $bin);
     }
 
     public function testCalculateHexHash()
@@ -36,7 +39,7 @@ class AverageHashTest extends PHPUnit_Framework_TestCase
         $hex = $ph->hex();
 
         $this->assertEquals(16, strlen($hex));
-        $this->assertEquals($this->hex_image2, $hex);
+        $this->assertEquals($this->hex_image1, $hex);
     }
 
     public function testCompareDifferentImages()
@@ -50,7 +53,7 @@ class AverageHashTest extends PHPUnit_Framework_TestCase
     public function testCompareSameImages()
     {
         $ph = new PerceptualHash($this->path_image1);
-        $diff = $ph->compare($this->path_image2);
+        $diff = $ph->compare($this->path_image1);
 
         $this->assertEquals(0, $diff);
     }

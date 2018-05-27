@@ -1,9 +1,12 @@
 <?php
 
+namespace Image\Tests;
+
 use Image\PerceptualHash;
 use Image\PerceptualHash\Algorithm\PerceptionHash;
+use PHPUnit\Framework\TestCase;
 
-class PerceptionHashTest extends PHPUnit_Framework_TestCase
+class PerceptionHashTest extends TestCase
 {
     private $path_image1;
     private $path_image2;
