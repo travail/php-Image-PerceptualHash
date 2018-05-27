@@ -1,9 +1,12 @@
 <?php
 
+namespace Image\Tests;
+
 use Image\PerceptualHash;
 use Image\PerceptualHash\Algorithm\DifferenceHash;
+use PHPUnit\Framework\TestCase;
 
-class DifferenceHashTest extends PHPUnit_Framework_TestCase
+class DifferenceHashTest extends TestCase
 {
     private $path_image1;
     private $path_image2;
@@ -29,7 +32,7 @@ class DifferenceHashTest extends PHPUnit_Framework_TestCase
         $bin = $ph->bin();
 
         $this->assertEquals(64, strlen($bin));
-        $this->assertEquals($this->bin_image2, $bin);
+        $this->assertEquals($this->bin_image1, $bin);
     }
 
     public function testCalculateHexHash()
@@ -39,7 +42,7 @@ class DifferenceHashTest extends PHPUnit_Framework_TestCase
         $hex = $ph->hex();
 
         $this->assertEquals(16, strlen($hex));
-        $this->assertEquals($this->hex_image2, $hex);
+        $this->assertEquals($this->hex_image1, $hex);
     }
 
     public function testCompareDifferentImages()
@@ -55,7 +58,7 @@ class DifferenceHashTest extends PHPUnit_Framework_TestCase
     {
         $algorithm = new DifferenceHash;
         $ph = new PerceptualHash($this->path_image1, $algorithm);
-        $diff = $ph->compare($this->path_image2);
+        $diff = $ph->compare($this->path_image1);
 
         $this->assertEquals(0, $diff);
     }

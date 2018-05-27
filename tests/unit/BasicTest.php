@@ -1,9 +1,12 @@
 <?php
 
+namespace Image\Tests;
+
 use Image\PerceptualHash;
 use Image\PerceptualHash\Exception\FileNotFoundException;
+use PHPUnit\Framework\TestCase;
 
-class BasicTest extends PHPUnit_Framework_TestCase
+class BasicTest extends TestCase
 {
     private $path_non_existent_image;
     private $path_image1;
